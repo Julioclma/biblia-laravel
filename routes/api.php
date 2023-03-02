@@ -1,7 +1,9 @@
 <?php
 
+use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use Symfony\Component\HttpFoundation\JsonResponse;
 
 /*
 |--------------------------------------------------------------------------
@@ -14,10 +16,14 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/teste', function(){
-
-    return 'testando api';
+Route::get('/testamentos', function(){
+    $json = array("Livros" =>
+     array("Velho testamento",   "Novo testamento")
+    );
+         return response()->json($json);
 });
+
+
 
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
