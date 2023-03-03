@@ -4,6 +4,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use Symfony\Component\HttpFoundation\JsonResponse;
+use App\Http\Controllers\TestamentoController;
 
 /*
 |--------------------------------------------------------------------------
@@ -16,15 +17,9 @@ use Symfony\Component\HttpFoundation\JsonResponse;
 |
 */
 
-Route::get('/testamentos', function(){
-    $json = array("Livros" =>
-     array("Velho testamento",   "Novo testamento")
-    );
-         return response()->json($json);
-});
+Route::get('testamentos', [TestamentoController::class, 'index']);
+Route::post('testamento',  [TestamentoController::class, 'store']);
 
-
-
-Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-    return $request->user();
-});
+// Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
+//     return $request->user();
+// });

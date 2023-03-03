@@ -3,22 +3,50 @@
 namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
+use App\Models\Testamento;
 use Illuminate\Http\Request;
 
 class TestamentoController extends Controller
 {
-    public function getData(){
+    /**
+     * Display a listing of the resource.
+     */
+    public function index()
+    {
+        return Testamento::all();
+    }
 
-        $json = "[
-          {
-            'Livro' : 'Velho Testamento'
-          },
-          {
-            'Livro' : 'Novo Testamento'
-          }
+    /**
+     * Store a newly created resource in storage.
+     */
+    public function store(Request $request)
+    {
 
-            ]";
+        return Testamento::create($request->all());
 
-            return $json;
+    }
+
+    /**
+     * Display the specified resource.
+     */
+    public function show(string $id)
+    {
+        //
+    }
+
+    /**
+     * Update the specified resource in storage.
+     */
+    public function update(Request $request, string $id)
+    {
+        //
+    }
+
+    /**
+     * Remove the specified resource from storage.
+     */
+    public function destroy(string $id)
+    {
+        //
     }
 }
