@@ -18,7 +18,6 @@ return new class extends Migration
             $table->text('texto');
             $table->unsignedBigInteger('livro_id');
             $table->timestamps();
-
             $table->foreign('livro_id')->references('id')->on('livros');
         });
     }

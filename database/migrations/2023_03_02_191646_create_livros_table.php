@@ -18,7 +18,6 @@ return new class extends Migration
             $table->string('abreviacao');
             $table->unsignedBigInteger('testamento_id');
             $table->timestamps();
-
             $table->foreign('testamento_id')->references('id')->on('testamentos');
         });
     }
