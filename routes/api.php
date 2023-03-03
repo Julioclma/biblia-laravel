@@ -16,9 +16,11 @@ use App\Http\Controllers\TestamentoController;
 | be assigned to the "api" middleware group. Make something great!
 |
 */
-
-Route::get('testamentos', [TestamentoController::class, 'index']);
+Route::get('testamento/{id}', [TestamentoController::class, 'show']);
+Route::get('testamento', [TestamentoController::class, 'index']);
 Route::post('testamento',  [TestamentoController::class, 'store']);
+Route::put('testamento/{id}',  [TestamentoController::class, 'update']);
+Route::delete('testamento/{id}', [TestamentoController::class, 'destroy']);
 
 // Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 //     return $request->user();
