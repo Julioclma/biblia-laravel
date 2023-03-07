@@ -20,25 +20,32 @@ use App\Http\Controllers\TestamentoController;
 */
 
 //Testamentos
-Route::get('testamento/{id}', [TestamentoController::class, 'show']);
-Route::get('testamento', [TestamentoController::class, 'index']);
-Route::post('testamento',  [TestamentoController::class, 'store']);
-Route::put('testamento/{id}',  [TestamentoController::class, 'update']);
-Route::delete('testamento/{id}', [TestamentoController::class, 'destroy']);
+// Route::get('testamento/{id}', [TestamentoController::class, 'show']);
+// Route::get('testamento', [TestamentoController::class, 'index']);
+// Route::post('testamento',  [TestamentoController::class, 'store']);
+// Route::put('testamento/{id}',  [TestamentoController::class, 'update']);
+// Route::delete('testamento/{id}', [TestamentoController::class, 'destroy']);
 
 //Livros
-Route::post('livro', [LivroController::class, 'store']);
-Route::get('livro', [LivroController::class, 'index']);
-Route::get('livro/{id}', [LivroController::class, 'show']);
-Route::put('livro/{id}', [LivroController::class, 'update']);
-Route::delete('livro/{id}', [LivroController::class, 'destroy']);
+// Route::post('livro', [LivroController::class, 'store']);
+// Route::get('livro', [LivroController::class, 'index']);
+// Route::get('livro/{id}', [LivroController::class, 'show']);
+// Route::put('livro/{id}', [LivroController::class, 'update']);
+// Route::delete('livro/{id}', [LivroController::class, 'destroy']);
 
 //Livros
-Route::post('versiculo', [VersiculoController::class, 'store']);
-Route::get('versiculo', [VersiculoController::class, 'index']);
-Route::get('versiculo/{id}', [VersiculoController::class, 'show']);
-Route::put('versiculo/{id}', [VersiculoController::class, 'update']);
-Route::delete('versiculo/{id}', [VersiculoController::class, 'destroy']);
+// Route::post('versiculo', [VersiculoController::class, 'store']);
+// Route::get('versiculo', [VersiculoController::class, 'index']);
+// Route::get('versiculo/{id}', [VersiculoController::class, 'show']);
+// Route::put('versiculo/{id}', [VersiculoController::class, 'update']);
+// Route::delete('versiculo/{id}', [VersiculoController::class, 'destroy']);
+
+
+Route::apiResources([
+    'versiculo'=> VersiculoController::class,
+    'livro'=> LivroController::class,
+    'testamento' => TestamentoController::class,
+]);
 
 
 // Route::middleware('auth:sanctum')->get('/user', function (Request $request) {

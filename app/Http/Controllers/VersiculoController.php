@@ -16,22 +16,70 @@ class VersiculoController extends Controller
     public function store(Request $request)
     {
 
-        return Versiculo::create($request->all());
+        $versiculo = Versiculo::create($request->all());
+
+        if ($versiculo) {
+            return response()->json([
+                'message' => 'Versiculo cadastrado com sucesso!'
+            ], 201);
+        }
+
+        return response()->json([
+            'message' => 'Não foi possivel cadastrar o versiculo'
+        ], 404);
     }
 
-    public function show($id)
+    public function show($versiculo)
     {
-        return Versiculo::findOrFail($id);
+        $versiculo = Versiculo::find($versiculo);
+
+        if ($versiculo) {
+            return $versiculo;
+        }
+
+        return response()->json([
+            'message' => 'Versiculo não encontrado!'
+        ]);
     }
 
-    public function update($id, Request $request){
+    public function update($versiculo, Request $request)
+    {
 
-      return  Versiculo::findOrFail($id)->update($request->all());
+        $versiculo = Versiculo::find($versiculo);
+
+        if ($versiculo) {
+            $check = $versiculo->update($request->all());
+
+            if ($check) {
+                return response()->json([
+                    'message' => 'Versiculo alterado com sucesso!'
+                ], 201);
+            }
+
+            return response()->json([
+                'message' => 'Erro ao alterar versiculo'
+            ], 404);
+        }
+
+        return response()->json([
+            'message' => 'Versiculo não encontrado!'
+        ], 404);
 
     }
 
-    public function destroy($id){
-        Versiculo::destroy($id);
+    public function destroy($versiculo)
+    {
+        $destroy = Versiculo::destroy($versiculo);
+
+        if ($destroy) {
+            return response()->json([
+                'message' => 'Versiculo deletado com sucesso!'
+            ], 201);
+        }
+
+        return response()->json([
+            'message' => 'Não foi possivel deletar o versiculo'
+        ]);
     }
 
 }

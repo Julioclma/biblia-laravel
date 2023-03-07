@@ -22,29 +22,64 @@ class TestamentoController extends Controller
     public function store(Request $request)
     {
 
-        return Testamento::create($request->all());
+        $testamento = Testamento::create($request->all());
 
+
+        if($testamento){
+            return response()->json([
+                'message' => 'Testamento cadastrado com sucesso!'
+            ], 201);
+        }
+
+        return response()->json([
+            'message' => 'Não foi possivel cadastrar testamento!'
+        ]);
     }
 
     /**
      * Display the specified resource.
      */
-    public function show($id)
+    public function show($testamento)
     {
-        return Testamento::findOrFail($id);
+        $testamento = Testamento::find($testamento);
 
+        if($testamento){
+            return $testamento;
+        }
+
+
+        return response()->json([
+            'message' => 'Testamento inválido!'
+        ], 404);
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, $testamento)
     {
-        $testamento = Testamento::findOrFail($id);
+        $testamento = Testamento::find($testamento);
 
-        $testamento->update($request->all());
+        if($testamento){
+            $check = $testamento->update($request->all());
 
-        return $testamento;
+            if($check){
+                return response()->json([
+                    'message' => 'Testamento atualizado com sucesso'
+                ], 201);
+            }else{
+                return response()->json([
+                    'message' => 'Não foi possivel atualizar o testamento!'
+                ], 404);
+            }
+        }
+
+
+
+
+        return  response()->json([
+            'message' => 'Testamento não encontrado!'
+        ], 201);;
 
 
     }
@@ -52,8 +87,21 @@ class TestamentoController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy($id)
+    public function destroy($testamento)
     {
-        return Testamento::destroy($id);
+        $destroy = Testamento::destroy($testamento);
+
+
+        if($destroy){
+            return response()->json([
+                'message' => 'Testamento deletado com sucesso!'
+            ], 201);
+        }
+
+        return response()->json([
+
+            'message' => 'Não foi possivel deletar o testamento!'
+        ], 404);
+
     }
 }

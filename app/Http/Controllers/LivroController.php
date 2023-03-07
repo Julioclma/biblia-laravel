@@ -13,7 +13,15 @@ class LivroController extends Controller
      */
     public function index()
     {
-        return Livro::all();
+        $result = Livro::all();
+        if (!$result) {
+
+            return response()->json([
+                'message' => 'Nenhum livro encontrado!'
+            ], 404);
+        }
+
+        return $result;
     }
 
     /**
@@ -21,32 +29,82 @@ class LivroController extends Controller
      */
     public function store(Request $request)
     {
-        Livro::create($request->all());
 
+        if (Livro::create($request->all())) {
+            return response()->json([
+                'message' => 'Livro cadastrado com sucesso!'
+            ], 201);
+        }
+        return response()->json(
+            [
+
+                'message' => 'Erro ao cadastrar o livro!'
+
+            ],
+            404
+        );
     }
 
     /**
      * Display the specified resource.
      */
-    public function show($id)
+    public function show($livro)
     {
-        return Livro::findOrFail($id);
+        $check = Livro::find($livro);
 
+        if ($check) {
+            return $check;
+        }
+
+        return response()->json([
+            "message" => "Livro não encontrado!"
+        ], 404);
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, $livro)
     {
-        return Livro::findOrFail($id)->update($request->all());
+
+        $find = Livro::find($livro);
+
+        if (!$find) {
+            return response()->json([
+                'message' => 'Livro não encontrado!'
+            ], 404);
+        } else {
+            $update = $livro->update($request->all());
+            if ($update) {
+                return response()->json([
+                    'message' => 'Livro atualizado com sucesso!'
+                ], 201);
+            } else {
+
+                return response()->json([
+                    'message' => 'Não foi possivel atualizar o livro!'
+                ], 404);
+            }
+        }
+
+
+
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy($id)
+    public function destroy($livro)
     {
-        return Livro::destroy($id);
+        $destroy = Livro::destroy($livro);
+
+        if ($destroy) {
+            return response()->json([
+                'message' => 'Livro deletado com sucesso!'
+            ], 201);
+        }
+        return response()->json([
+            'message' => 'Não foi possivel deletar o livro!'
+        ], 404);
     }
 }
