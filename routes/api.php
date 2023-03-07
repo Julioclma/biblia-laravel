@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AuthController;
 use App\Http\Controllers\Controller;
 use App\Http\Controllers\LivroController;
 use App\Http\Controllers\VersiculoController;
@@ -44,10 +45,12 @@ use App\Http\Controllers\TestamentoController;
 Route::apiResources([
     'versiculo'=> VersiculoController::class,
     'livro'=> LivroController::class,
-    'testamento' => TestamentoController::class,
+    'testamento' => TestamentoController::class
+
 ]);
 
 
+Route::post('/register', [AuthController::class, 'register']);
 // Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 //     return $request->user();
 // });
