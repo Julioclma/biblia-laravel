@@ -41,16 +41,21 @@ use App\Http\Controllers\TestamentoController;
 // Route::put('versiculo/{id}', [VersiculoController::class, 'update']);
 // Route::delete('versiculo/{id}', [VersiculoController::class, 'destroy']);
 
-
-Route::apiResources([
-    'versiculo'=> VersiculoController::class,
-    'livro'=> LivroController::class,
-    'testamento' => TestamentoController::class
-
-]);
+Route::group(['middleware' => ['auth:sanctum']], function(){
+        Route::apiResources([
+            'versiculo'=> VersiculoController::class,
+            'livro'=> LivroController::class,
+            'testamento' => TestamentoController::class
+        ]);
+        Route::post('/logout', [AuthController::class, 'logout']);
+    });
 
 
 Route::post('/register', [AuthController::class, 'register']);
+Route::post('/login', [AuthController::class, 'login']);
+
+
+
 // Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 //     return $request->user();
 // });

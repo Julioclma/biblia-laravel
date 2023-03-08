@@ -10,4 +10,14 @@ class Testamento extends Model
     use HasFactory;
 
   protected  $fillable = ['nome'];
+
+
+
+  /**
+   * Pegar livros vinculados
+   */
+
+   public function livros(){
+    return $this->hasMany(Livro::class);
+   }
 }

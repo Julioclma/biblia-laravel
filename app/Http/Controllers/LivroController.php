@@ -53,6 +53,11 @@ class LivroController extends Controller
         $check = Livro::find($livro);
 
         if ($check) {
+
+            $check->testamento;
+              $check->versiculos;
+
+
             return $check;
         }
 
