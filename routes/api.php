@@ -2,7 +2,9 @@
 
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\Controller;
+use App\Http\Controllers\IdiomasController;
 use App\Http\Controllers\LivroController;
+use App\Http\Controllers\TraducoesController;
 use App\Http\Controllers\VersiculoController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -49,6 +51,12 @@ Route::group(['middleware' => ['auth:sanctum']], function(){
         ]);
         Route::post('/logout', [AuthController::class, 'logout']);
     });
+
+
+    Route::apiResources([
+        'idiomas'=> IdiomasController::class,
+        'traducoes'=> TraducoesController::class,
+    ]);
 
 
 Route::post('/register', [AuthController::class, 'register']);
